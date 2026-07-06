@@ -51,9 +51,34 @@ class GeminiAI:
         Returns:
             Sanitized content safe for LaTeX processing
         """
-        # Remove box-drawing characters
-        content = content
-        # Replace common Unicode with LaTeX-safe alternatives
+        # First, escape LaTeX special characters EXCEPT in markdown contexts
+        # This must be done BEFORE Unicode replacement
+        import re
+
+        # Don't escape # in headings (lines starting with #)
+        lines = content.split('\n')
+        escaped_lines = []
+
+        for line in lines:
+            # Check if this is a markdown heading
+            if line.strip().startswith('#'):
+                # It's a heading, don't escape # but escape other specials
+                # Only escape the # if it's not at the start
+                heading_match = re.match(r'^(#+)\s*(.*)', line)
+                if heading_match:
+                    hashes, rest = heading_match.groups()
+                    # Escape special chars in the rest of the line
+                    rest = self._escape_latex_specials(rest)
+                    escaped_lines.append(hashes + ' ' + rest)
+                else:
+                    escaped_lines.append(line)
+            else:
+                # Not a heading, escape all special chars
+                escaped_lines.append(self._escape_latex_specials(line))
+
+        content = '\n'.join(escaped_lines)
+
+        # Then replace Unicode characters
         replacements = {
             '→': '->',
             '←': '<-',
@@ -99,6 +124,30 @@ class GeminiAI:
         sanitized = '\n\n'.join(sanitized.split('\n\n\n+'))
 
         return sanitized
+
+    def _escape_latex_specials(self, text: str) -> str:
+        """Escape LaTeX special characters in text."""
+        import re
+        latex_special_chars = {
+            '\\': r'\\textbackslash{}',  # Must be first
+            '&': r'\\&',
+            '%': r'\\%',
+            '$': r'\\$',  # Critical for currency amounts
+            '#': r'\\#',
+            '_': r'\\_',
+            '{': r'\\{',
+            '}': r'\\}',
+            '~': r'\\textasciitilde{}',
+            '^': r'\\^{}',
+        }
+
+        for char, escaped in latex_special_chars.items():
+            if char == '\\':
+                text = re.sub(r'(?<!\\)\\', escaped, text)
+            else:
+                text = re.sub(r'(?<!\\)' + re.escape(char), escaped, text)
+
+        return text
 
     def generate(self, options: AIOptions) -> AIContentResult:
         """

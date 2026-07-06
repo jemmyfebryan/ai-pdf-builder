@@ -99,22 +99,28 @@ def sanitize_latex(content: str) -> str:
         sanitized = re.sub(re.escape(cmd) + r'\s.*', '', sanitized)
 
     # Escape special LaTeX characters that aren't part of commands
-    latex_special_chars = {
-        '&': r'\\&',
-        '%': r'\\%',
-        '$': r'\\$',
-        '#': r'\\#',
-        '_': r'\\_',
-        '{': r'\\{',
-        '}': r'\\}',
-        '~': r'\\textasciitilde{}',
-        '^': r'\\^{}',
-    }
+    # Process in order to avoid double-escaping
+    latex_special_chars = [
+        ('\\', r'\\textbackslash{}'),  # Must be first
+        ('&', r'\\&'),
+        ('%', r'\\%'),
+        ('$', r'\\$'),  # Dollar signs for currency
+        ('#', r'\\#'),
+        ('_', r'\\_'),
+        ('{', r'\\{'),
+        ('}', r'\\}'),
+        ('~', r'\\textasciitilde{}'),
+        ('^', r'\\^{}'),
+    ]
 
-    # Only escape if not already escaped
-    for char, escaped in latex_special_chars.items():
-        # Look for unescaped instances
-        pattern = r'(?<!\\)' + re.escape(char)
+    for char, escaped in latex_special_chars:
+        # Only escape if not already preceded by backslash
+        # Look for the character that's not already escaped
+        if char == '\\':
+            # Handle backslashes specially
+            pattern = r'(?<!\\)\\'
+        else:
+            pattern = r'(?<!\\)' + re.escape(char)
         sanitized = re.sub(pattern, escaped, sanitized)
 
     return sanitized

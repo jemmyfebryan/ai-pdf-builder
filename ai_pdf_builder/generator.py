@@ -75,8 +75,8 @@ def generate_pdf(options: GenerationOptions) -> GenerationResult:
         # Create temporary working directory
         temp_dir = create_temp_directory()
 
-        # Sanitize content for security
-        sanitized_content = sanitize_latex(options.content)
+        # Don't re-sanitize - AI module already handles LaTeX sanitization
+        sanitized_content = options.content
 
         # Build full markdown with YAML front matter
         full_markdown = _build_markdown_document(sanitized_content, options)
