@@ -128,10 +128,13 @@ def ai_command(
                 company=company,
             )
 
+            # Use default template for termsheet to avoid table issues
+            template_name = document_type if document_type != "termsheet" else "default"
+
             gen_options = GenerationOptions(
                 content=content,
                 metadata=metadata,
-                template=document_type,
+                template=template_name,
                 output_path=output or f"{document_type}.pdf",
             )
 

@@ -327,6 +327,7 @@ def _build_pandoc_command(
         "-o", output_path,
         "--pdf-engine=pdflatex",
         f"--template={template_path}",
+        "--columns=80",  # Simpler column calculations for better LaTeX compatibility
         "-V", f"geometry:margin={options.margin}",
         "-V", f"fontsize={options.fontsize}pt",
         "-V", "papersize=letter",

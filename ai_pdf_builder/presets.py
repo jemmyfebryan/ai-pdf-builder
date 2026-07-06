@@ -65,7 +65,7 @@ def generate_termsheet(options: PresetOptions) -> GenerationResult:
     gen_options = GenerationOptions(
         content=options.content,
         metadata=options.metadata,
-        template=options.template or "termsheet",
+        template=options.template or "default",  # Use default template for better table compatibility
         output_path=options.output_path,
         toc=False,
         numbering=True,
