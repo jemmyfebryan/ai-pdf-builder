@@ -1,0 +1,194 @@
+% ai-pdf-builder - Professional Agreement Template
+% Clean legal document styling
+% Suitable for contracts, NDAs, service agreements
+
+\documentclass[11pt,a4paper]{article}
+
+% Essential Packages
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Professional serif for legal docs
+\usepackage{charter}
+
+% Geometry - legal document margins
+\usepackage[margin=1.25in, top=1.5in]{geometry}
+\usepackage{setspace}
+\setstretch{1.3}
+
+% Graphics and Colors
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+
+% Professional Legal Color Palette
+\definecolor{darkNavy}{RGB}{23, 37, 84}
+\definecolor{deepGray}{RGB}{55, 65, 81}
+\definecolor{mediumGray}{RGB}{107, 114, 128}
+\definecolor{lightGray}{RGB}{243, 244, 246}
+\definecolor{accentBlue}{RGB}{37, 99, 235}
+\definecolor{ruleGray}{RGB}{209, 213, 219}
+
+% Tables
+\usepackage{longtable,booktabs,array}
+\usepackage{tabularx}
+\renewcommand{\arraystretch}{1.4}
+
+% Links - subtle for legal docs
+\usepackage{hyperref}
+\hypersetup{
+    unicode=true,
+    colorlinks=true,
+    linkcolor=deepGray,
+    citecolor=deepGray,
+    urlcolor=accentBlue,
+    pdfborder={0 0 0}
+}
+
+% Headers and Footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{mediumGray}$if(title)$$title$$endif$}
+\fancyhead[R]{\small\color{mediumGray}Page \thepage}
+\fancyfoot[C]{\footnotesize\color{mediumGray}CONFIDENTIAL}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{ruleGray}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrulewidth}{0pt}
+
+% Section Styling - legal numbered format
+\usepackage{titlesec}
+
+\titleformat{\section}
+    {\large\bfseries\color{darkNavy}}
+    {\thesection.}
+    {0.5em}
+    {}
+\titlespacing*{\section}{0pt}{2em}{1em}
+
+\titleformat{\subsection}
+    {\normalsize\bfseries\color{deepGray}}
+    {\thesubsection}
+    {0.5em}
+    {}
+\titlespacing*{\subsection}{0pt}{1.5em}{0.8em}
+
+\titleformat{\subsubsection}
+    {\normalsize\itshape\color{mediumGray}}
+    {\thesubsubsection}
+    {0.5em}
+    {}
+
+% Lists - legal style
+\usepackage{enumitem}
+\setlist{topsep=6pt, leftmargin=2em}
+\setlist[itemize,1]{label=\textcolor{deepGray}{\textbullet}}
+\setlist[enumerate,1]{label=(\alph*)}
+\setlist[enumerate,2]{label=(\roman*)}
+
+% Pandoc compatibility
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Signature blocks
+\newcommand{\signatureblock}[2]{%
+    \vspace{3em}%
+    \noindent
+    \begin{minipage}[t]{0.45\textwidth}
+        \rule{\textwidth}{0.5pt}\\[0.5em]
+        \textbf{#1}\\
+        \small\color{mediumGray}Signature\\[2em]
+        \rule{\textwidth}{0.5pt}\\[0.5em]
+        \small\color{mediumGray}Name:\\[2em]
+        \rule{\textwidth}{0.5pt}\\[0.5em]
+        \small\color{mediumGray}Date:
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \rule{\textwidth}{0.5pt}\\[0.5em]
+        \textbf{#2}\\
+        \small\color{mediumGray}Signature\\[2em]
+        \rule{\textwidth}{0.5pt}\\[0.5em]
+        \small\color{mediumGray}Name:\\[2em]
+        \rule{\textwidth}{0.5pt}\\[0.5em]
+        \small\color{mediumGray}Date:
+    \end{minipage}%
+}
+
+% Definition term styling
+\newcommand{\defterm}[1]{\textbf{"#1"}}
+
+% Additional includes
+$if(header-includes)$
+$header-includes$
+$endif$
+
+\begin{document}
+
+% Agreement Title Page
+\begin{titlepage}
+    \centering
+    
+    \vspace*{3cm}
+    
+    % Title
+    {\fontsize{28}{34}\selectfont\bfseries\color{darkNavy}$if(title)$$title$$endif$\par}
+    
+    \vspace{0.5cm}
+    
+    % Subtitle
+    $if(subtitle)$
+    {\Large\color{mediumGray}$subtitle$\par}
+    \vspace{0.3cm}
+    $endif$
+    
+    % Rule
+    {\color{ruleGray}\rule{0.4\textwidth}{1pt}}
+    
+    \vspace{2cm}
+    
+    % Parties
+    {\large\color{deepGray}
+    \textbf{Between}
+    
+    \vspace{0.5cm}
+    
+    $if(party1)$$party1$$else$[PARTY 1]$endif$
+    
+    \vspace{0.3cm}
+    \textbf{and}
+    \vspace{0.3cm}
+    
+    $if(party2)$$party2$$else$[PARTY 2]$endif$
+    \par}
+    
+    \vfill
+    
+    % Date and metadata
+    {\color{mediumGray}
+    Effective Date: $if(date)$$date$$else$\_\_\_\_\_\_\_\_\_\_\_\_$endif$
+    
+    \vspace{0.5cm}
+    
+    $if(version)$Version: $version$$endif$
+    \par}
+    
+    \vspace{2cm}
+    
+\end{titlepage}
+
+% Table of Contents for longer agreements
+$if(toc)$
+{
+\hypersetup{linkcolor=deepGray}
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+\newpage
+}
+$endif$
+
+% Main Content
+$body$
+
+\end{document}

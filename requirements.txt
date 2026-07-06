@@ -1,0 +1,10 @@
+google-genai
+pandoc
+pydantic
+python-dotenv
+typer
+rich
+pypdf
+pytest
+black
+mypy

@@ -1,0 +1,235 @@
+% ai-pdf-builder - Premium Whitepaper Template
+% Modern, clean design for technical documents
+% Inspired by top-tier tech company whitepapers
+
+\documentclass[11pt,a4paper]{article}
+
+% Essential Packages
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Better fonts - Helvetica-like
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Geometry - generous margins for readability
+\usepackage[margin=1.2in, top=1.5in, bottom=1.2in]{geometry}
+\usepackage{setspace}
+\setstretch{1.25}
+
+% Graphics and Colors
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning,shapes.geometric}
+
+% Premium Color Palette - Modern Tech
+\definecolor{primaryBlue}{RGB}{37, 99, 235}
+\definecolor{darkBlue}{RGB}{30, 58, 138}
+\definecolor{lightBlue}{RGB}{219, 234, 254}
+\definecolor{accentTeal}{RGB}{20, 184, 166}
+\definecolor{darkGray}{RGB}{31, 41, 55}
+\definecolor{mediumGray}{RGB}{107, 114, 128}
+\definecolor{lightGray}{RGB}{243, 244, 246}
+\definecolor{warmWhite}{RGB}{249, 250, 251}
+\definecolor{alertOrange}{RGB}{234, 88, 12}
+
+% Tables - modern styling
+\usepackage{longtable,booktabs,array}
+\usepackage{multirow,tabularx}
+\renewcommand{\arraystretch}{1.4}
+
+% Custom table style
+\newcommand{\tableheaderstyle}{\rowcolor{darkBlue}\color{white}\bfseries}
+
+% Links
+\usepackage{hyperref}
+\hypersetup{
+    unicode=true,
+    colorlinks=true,
+    linkcolor=primaryBlue,
+    citecolor=primaryBlue,
+    urlcolor=primaryBlue,
+    breaklinks=true,
+    pdfborder={0 0 0}
+}
+\urlstyle{same}
+
+% Headers and Footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{mediumGray}$if(title)$$title$$endif$}
+\fancyhead[R]{\small\color{mediumGray}$if(version)$$version$$endif$}
+\fancyfoot[L]{\small\color{mediumGray}$if(author)$$author$$endif$}
+\fancyfoot[C]{\small\color{primaryBlue}\textbf{\thepage}}
+\fancyfoot[R]{\small\color{mediumGray}$if(date)$$date$$endif$}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{lightBlue}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrulewidth}{0pt}
+
+% Section Styling - clean modern look
+\usepackage{titlesec}
+
+\titleformat{\section}
+    {\Large\bfseries\color{darkGray}}
+    {\textcolor{primaryBlue}{\thesection}}{0.8em}{}
+\titlespacing*{\section}{0pt}{2em}{1em}
+
+\titleformat{\subsection}
+    {\large\bfseries\color{darkGray}}
+    {\textcolor{mediumGray}{\thesubsection}}{0.6em}{}
+\titlespacing*{\subsection}{0pt}{1.5em}{0.8em}
+
+\titleformat{\subsubsection}
+    {\normalsize\bfseries\color{mediumGray}}
+    {\thesubsubsection}{0.5em}{}
+
+% Lists - modern bullets
+\usepackage{enumitem}
+\setlist{noitemsep, topsep=6pt, leftmargin=1.5em}
+\setlist[itemize,1]{label=\textcolor{primaryBlue}{\textbullet}}
+\setlist[itemize,2]{label=\textcolor{accentTeal}{\textendash}}
+\setlist[enumerate,1]{label=\textcolor{primaryBlue}{\arabic*.}}
+
+% Pandoc compatibility
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Code blocks
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{lightGray},
+    backgroundcolor=\color{lightGray},
+    xleftmargin=1em,
+    framexleftmargin=0.5em
+}
+
+% Simple callout boxes using fbox
+\newenvironment{keyinsight}{%
+    \par\vspace{0.5em}%
+    \noindent\colorbox{lightBlue}{%
+    \begin{minipage}{\dimexpr\textwidth-2\fboxsep}%
+    \textcolor{primaryBlue}{\textbf{Key Insight:}}\\[0.3em]%
+}{%
+    \end{minipage}}%
+    \par\vspace{0.5em}%
+}
+
+\newenvironment{notebox}{%
+    \par\vspace{0.5em}%
+    \noindent\fcolorbox{alertOrange}{warmWhite}{%
+    \begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule}%
+    \textcolor{alertOrange}{\textbf{Note:}}\\[0.3em]%
+}{%
+    \end{minipage}}%
+    \par\vspace{0.5em}%
+}
+
+% Quote styling
+\usepackage{csquotes}
+\renewenvironment{quote}{%
+    \list{}{\leftmargin=2em\rightmargin=2em}%
+    \item\relax\itshape\color{mediumGray}%
+    \textcolor{primaryBlue}{\textbf{``}}%
+}{%
+    \textcolor{primaryBlue}{\textbf{''}}%
+    \endlist
+}
+
+% Additional includes
+$if(header-includes)$
+$header-includes$
+$endif$
+
+\begin{document}
+
+% Premium Title Page
+\begin{titlepage}
+    \newgeometry{margin=0pt}
+    
+    % Background with gradient effect
+    \begin{tikzpicture}[remember picture, overlay]
+        % Main background
+        \fill[white] (current page.south west) rectangle (current page.north east);
+        % Top accent bar
+        \fill[primaryBlue] (current page.north west) rectangle ([yshift=-3cm]current page.north east);
+        % Subtle side accent
+        \fill[lightBlue] (current page.south west) rectangle ([xshift=8pt]current page.north west);
+    \end{tikzpicture}
+    
+    \begin{center}
+    
+    \vspace*{4cm}
+    
+    % Title
+    {\fontsize{36}{42}\selectfont\bfseries\color{darkGray}$if(title)$$title$$endif$\par}
+    
+    \vspace{0.6cm}
+    
+    % Subtitle
+    $if(subtitle)$
+    {\fontsize{18}{24}\selectfont\color{mediumGray}$subtitle$\par}
+    $endif$
+    
+    \vspace{0.8cm}
+    
+    % Accent line
+    {\color{primaryBlue}\rule{0.3\textwidth}{3pt}}
+    
+    \vspace{2.5cm}
+    
+    % Abstract
+    $if(abstract)$
+    \begin{minipage}{0.75\textwidth}
+        \centering
+        \color{mediumGray}
+        \large
+        $abstract$
+    \end{minipage}
+    $endif$
+    
+    \vfill
+    
+    % Author and metadata
+    \begin{minipage}{0.8\textwidth}
+        \centering
+        $if(author)$
+        {\large\color{darkGray}\textbf{$author$}\par}
+        \vspace{0.3cm}
+        $endif$
+        $if(date)$
+        {\color{mediumGray}$date$\par}
+        $endif$
+        $if(version)$
+        \vspace{0.2cm}
+        {\small\color{primaryBlue}\textbf{$version$}\par}
+        $endif$
+    \end{minipage}
+    
+    \vspace{2cm}
+    
+    \end{center}
+    
+    \restoregeometry
+\end{titlepage}
+
+% Table of Contents with custom styling
+$if(toc)$
+{
+\hypersetup{linkcolor=darkGray}
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+\newpage
+}
+$endif$
+
+% Main Content
+$body$
+
+\end{document}

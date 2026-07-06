@@ -1,0 +1,128 @@
+% ai-pdf-builder - Professional Memo Template
+% Clean, executive memo styling
+% Optimized for business communications
+
+\documentclass[11pt,a4paper]{article}
+
+% Essential Packages
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Professional sans-serif
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Geometry - memo style margins
+\usepackage[margin=1in, top=1in]{geometry}
+\usepackage{setspace}
+\setstretch{1.15}
+
+% Graphics and Colors
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+
+% Professional Memo Color Palette
+\definecolor{darkCharcoal}{RGB}{31, 41, 55}
+\definecolor{slateBlue}{RGB}{71, 85, 105}
+\definecolor{accentBlue}{RGB}{59, 130, 246}
+\definecolor{lightBlue}{RGB}{239, 246, 255}
+\definecolor{borderGray}{RGB}{209, 213, 219}
+\definecolor{lightGray}{RGB}{249, 250, 251}
+
+% Tables
+\usepackage{longtable,booktabs,array}
+\usepackage{tabularx}
+\renewcommand{\arraystretch}{1.3}
+
+% Links
+\usepackage{hyperref}
+\hypersetup{
+    unicode=true,
+    colorlinks=true,
+    linkcolor=accentBlue,
+    citecolor=accentBlue,
+    urlcolor=accentBlue,
+    pdfborder={0 0 0}
+}
+
+% No headers/footers for clean memo look
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\small\color{slateBlue}\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Section Styling - clean and minimal
+\usepackage{titlesec}
+
+\titleformat{\section}
+    {\large\bfseries\color{darkCharcoal}}
+    {}
+    {0pt}
+    {}
+    [\vspace{-0.3em}{\color{borderGray}\rule{\textwidth}{0.5pt}}]
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+
+\titleformat{\subsection}
+    {\normalsize\bfseries\color{slateBlue}}
+    {}
+    {0pt}
+    {}
+\titlespacing*{\subsection}{0pt}{1em}{0.5em}
+
+% Lists
+\usepackage{enumitem}
+\setlist{noitemsep, topsep=4pt, leftmargin=1.2em}
+\setlist[itemize,1]{label=\textcolor{accentBlue}{\textbullet}}
+
+% Pandoc compatibility
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Simple callout box
+\newenvironment{actionitem}{%
+    \par\vspace{0.5em}%
+    \noindent\colorbox{lightBlue}{%
+    \begin{minipage}{\dimexpr\textwidth-2\fboxsep}%
+}{%
+    \end{minipage}}%
+    \par\vspace{0.5em}%
+}
+
+% Additional includes
+$if(header-includes)$
+$header-includes$
+$endif$
+
+\begin{document}
+
+% Memo Header Block
+\begin{center}
+{\Large\bfseries\color{darkCharcoal}MEMORANDUM}
+
+\vspace{0.3cm}
+{\color{accentBlue}\rule{0.3\textwidth}{2pt}}
+\end{center}
+
+\vspace{0.8cm}
+
+% Memo metadata table
+\noindent
+\begin{tabularx}{\textwidth}{@{}l@{\hspace{1em}}X@{}}
+\textbf{\color{slateBlue}TO:} & $if(to)$$to$$else$[Recipients]$endif$ \\[0.4em]
+\textbf{\color{slateBlue}FROM:} & $if(author)$$author$$else$[Sender]$endif$ \\[0.4em]
+\textbf{\color{slateBlue}DATE:} & $if(date)$$date$$else$\today$endif$ \\[0.4em]
+\textbf{\color{slateBlue}RE:} & $if(title)$$title$$endif$ $if(subtitle)$— $subtitle$$endif$ \\
+\end{tabularx}
+
+\vspace{0.4cm}
+{\color{borderGray}\rule{\textwidth}{1pt}}
+\vspace{0.8cm}
+
+% Main Content
+$body$
+
+\end{document}

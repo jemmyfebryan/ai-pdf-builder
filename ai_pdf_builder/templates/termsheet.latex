@@ -1,0 +1,227 @@
+% ai-pdf-builder - Premium Term Sheet Template
+% Executive finance aesthetic - dark with gold accents
+% Professional investment document styling
+
+\documentclass[11pt,a4paper]{article}
+
+% Essential Packages
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Professional fonts
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Geometry
+\usepackage[margin=1in, top=1.2in]{geometry}
+\usepackage{setspace}
+\setstretch{1.2}
+
+% Graphics and Colors
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% Premium Finance Color Palette
+\definecolor{darkNavy}{RGB}{15, 23, 42}
+\definecolor{deepBlue}{RGB}{30, 41, 59}
+\definecolor{gold}{RGB}{234, 179, 8}
+\definecolor{lightGold}{RGB}{254, 243, 199}
+\definecolor{warmGold}{RGB}{202, 138, 4}
+\definecolor{slateGray}{RGB}{100, 116, 139}
+\definecolor{lightSlate}{RGB}{226, 232, 240}
+\definecolor{offWhite}{RGB}{248, 250, 252}
+
+% Tables - executive style
+\usepackage{longtable,booktabs,array}
+\usepackage{multirow,tabularx}
+\renewcommand{\arraystretch}{1.5}
+
+% Alternating row colors for tables
+\rowcolors{2}{offWhite}{white}
+
+% Links
+\usepackage{hyperref}
+\hypersetup{
+    unicode=true,
+    colorlinks=true,
+    linkcolor=warmGold,
+    citecolor=warmGold,
+    urlcolor=warmGold,
+    breaklinks=true,
+    pdfborder={0 0 0}
+}
+
+% Headers and Footers - executive style
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{slateGray}\textsc{$if(company)$$company$$endif$}}
+\fancyhead[R]{\small\color{slateGray}\textsc{Term Sheet}}
+\fancyfoot[L]{\footnotesize\color{slateGray}CONFIDENTIAL}
+\fancyfoot[C]{\small\color{gold}\textbf{\thepage}}
+\fancyfoot[R]{\footnotesize\color{slateGray}$if(date)$$date$$endif$}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{gold}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrulewidth}{0pt}
+
+% Section Styling - gold accents
+\usepackage{titlesec}
+
+\titleformat{\section}
+    {\Large\bfseries\color{darkNavy}}
+    {}
+    {0pt}
+    {\textcolor{gold}{\rule{4pt}{1.2em}}\hspace{0.5em}}
+    [\vspace{-0.3em}{\color{lightSlate}\rule{\textwidth}{0.5pt}}]
+\titlespacing*{\section}{0pt}{1.8em}{1em}
+
+\titleformat{\subsection}
+    {\large\bfseries\color{deepBlue}}
+    {}
+    {0pt}
+    {}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.6em}
+
+\titleformat{\subsubsection}
+    {\normalsize\bfseries\color{slateGray}}
+    {}
+    {0pt}
+    {}
+
+% Lists
+\usepackage{enumitem}
+\setlist{noitemsep, topsep=6pt, leftmargin=1.5em}
+\setlist[itemize,1]{label=\textcolor{gold}{\textbullet}}
+\setlist[itemize,2]{label=\textcolor{slateGray}{\textendash}}
+
+% Pandoc compatibility
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Simple callout boxes
+\newenvironment{keyterms}{%
+    \par\vspace{0.5em}%
+    \noindent\colorbox{lightGold}{%
+    \begin{minipage}{\dimexpr\textwidth-2\fboxsep}%
+}{%
+    \end{minipage}}%
+    \par\vspace{0.5em}%
+}
+
+\newenvironment{importantnote}{%
+    \par\vspace{0.5em}%
+    \noindent\fcolorbox{slateGray}{lightSlate}{%
+    \begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule}%
+}{%
+    \end{minipage}}%
+    \par\vspace{0.5em}%
+}
+
+% Signature line command
+\newcommand{\signatureline}[1]{%
+    \vspace{2em}%
+    \noindent\textcolor{gold}{\rule{0.45\textwidth}{0.5pt}}\\[0.3em]%
+    \noindent\textcolor{slateGray}{\small #1}%
+    \vspace{1em}%
+}
+
+% Two-column signature block
+\newcommand{\signatureblock}[4]{%
+    \vspace{2em}%
+    \noindent
+    \begin{minipage}[t]{0.45\textwidth}
+        \textcolor{gold}{\rule{\textwidth}{0.5pt}}\\[0.3em]
+        \textcolor{slateGray}{\small #1}\\
+        \textcolor{darkNavy}{\textbf{#2}}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \textcolor{gold}{\rule{\textwidth}{0.5pt}}\\[0.3em]
+        \textcolor{slateGray}{\small #3}\\
+        \textcolor{darkNavy}{\textbf{#4}}
+    \end{minipage}%
+    \vspace{1.5em}%
+}
+
+% Additional includes
+$if(header-includes)$
+$header-includes$
+$endif$
+
+\begin{document}
+
+% Executive Title Page
+\begin{titlepage}
+    \newgeometry{margin=0pt}
+    
+    % Dark navy background
+    \begin{tikzpicture}[remember picture, overlay]
+        \fill[darkNavy] (current page.south west) rectangle (current page.north east);
+        % Gold accent line at top
+        \fill[gold] ([yshift=-2.5cm]current page.north west) rectangle ([yshift=-2.6cm]current page.north east);
+        % Subtle corner accent
+        \fill[deepBlue] (current page.south west) rectangle ([xshift=6pt, yshift=6cm]current page.south west);
+    \end{tikzpicture}
+    
+    \begin{center}
+    
+    \vspace*{3cm}
+    
+    % Company name - gold
+    {\fontsize{48}{56}\selectfont\bfseries\color{gold}$if(company)$$company$$endif$\par}
+    
+    \vspace{1cm}
+    
+    % Document type
+    {\fontsize{24}{30}\selectfont\color{offWhite}\textsc{Term Sheet}\par}
+    
+    \vspace{0.6cm}
+    
+    % Gold rule
+    {\color{gold}\rule{0.4\textwidth}{2pt}}
+    
+    \vspace{2cm}
+    
+    % Subtitle/round info
+    $if(subtitle)$
+    {\fontsize{18}{24}\selectfont\color{lightSlate}$subtitle$\par}
+    \vspace{0.8cm}
+    $endif$
+    
+    % Date
+    {\Large\color{slateGray}$if(date)$$date$$endif$\par}
+    
+    \vfill
+    
+    % Summary box
+    $if(abstract)$
+    \begin{minipage}{0.7\textwidth}
+        \color{offWhite}
+        \centering
+        $abstract$
+    \end{minipage}
+    \vspace{2cm}
+    $endif$
+    
+    % Confidential notice
+    {\color{gold}\rule{0.2\textwidth}{0.5pt}}
+    
+    \vspace{0.5cm}
+    
+    {\small\color{slateGray}\textsc{Confidential} \textbullet\ \textsc{For Discussion Purposes Only}\par}
+    
+    \vspace{1.5cm}
+    
+    \end{center}
+    
+    \restoregeometry
+\end{titlepage}
+
+% Main Content
+$body$
+
+\end{document}

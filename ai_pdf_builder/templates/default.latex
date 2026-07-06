@@ -1,0 +1,150 @@
+% ai-pdf-builder - Default Professional LaTeX Template
+% Optimized for Pandoc conversion
+% Clean, modern styling for general documents
+
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+
+% Essential Packages
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Geometry and Spacing
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% Graphics and Colors
+\usepackage{graphicx}
+\usepackage{xcolor}
+\definecolor{primaryColor}{RGB}{59, 130, 246}
+\definecolor{secondaryColor}{RGB}{107, 114, 128}
+\definecolor{accentColor}{RGB}{17, 24, 39}
+
+% Tables
+\usepackage{longtable,booktabs}
+\usepackage{array}
+\usepackage{multirow}
+
+% Links and References
+\usepackage{hyperref}
+\hypersetup{
+    unicode=true,
+    colorlinks=true,
+    linkcolor=primaryColor,
+    citecolor=primaryColor,
+    urlcolor=primaryColor,
+    breaklinks=true
+}
+\urlstyle{same}
+
+% Headers and Footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{secondaryColor}{$if(title)$$title$$endif$}}
+\fancyhead[R]{\small\textcolor{secondaryColor}{$if(version)$$version$$endif$}}
+\fancyfoot[C]{\small\textcolor{secondaryColor}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Titles and Sections
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{accentColor}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{secondaryColor}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{secondaryColor}}{\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist{noitemsep}
+
+% Pandoc tightlist command
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Code Blocks
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10}
+}
+
+% Additional Packages
+$if(header-includes)$
+$header-includes$
+$endif$
+
+% Title Information
+$if(title)$
+\title{
+    \Huge\textbf{$title$}\\
+    $if(subtitle)$\Large\textit{$subtitle$}$endif$
+}
+$endif$
+
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+
+$if(date)$
+\date{$date$}
+$else$
+\date{}
+$endif$
+
+% Begin Document
+\begin{document}
+
+% Custom Title Page
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    {\Huge\textbf{$if(title)$$title$$endif$}\par}
+    \vspace{0.5cm}
+    {\LARGE\textit{$if(subtitle)$$subtitle$$endif$}\par}
+    $if(author)$
+    \vspace{0.8cm}
+    {\large $author$\par}
+    $endif$
+    \vspace{2cm}
+    
+    $if(abstract)$
+    \begin{quote}
+        \large
+        $abstract$
+    \end{quote}
+    $endif$
+    
+    \vfill
+    
+    {\large
+    $if(version)$\textbf{$version$}\\$endif$
+    $if(date)$$date$\\$endif$
+    \vspace{0.5cm}
+    $if(website)$\url{$website$}\\$endif$
+    $if(twitter)$$twitter$$endif$
+    }
+    
+    \vspace{1cm}
+\end{titlepage}
+
+% Table of Contents
+$if(toc)$
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+}
+\newpage
+$endif$
+
+% Main Content
+$body$
+
+\end{document}
