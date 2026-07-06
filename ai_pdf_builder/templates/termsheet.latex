@@ -38,10 +38,14 @@
 % Tables - executive style
 \usepackage{longtable,booktabs,array}
 \usepackage{multirow,tabularx}
+\usepackage{calc}
 \renewcommand{\arraystretch}{1.5}
 
 % Alternating row colors for tables
 \rowcolors{2}{offWhite}{white}
+
+% Provide default columnwidth for Pandoc table calculations
+\providecommand{\columnwidth}{0.9\textwidth}
 
 % Links
 \usepackage{hyperref}

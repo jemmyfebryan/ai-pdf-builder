@@ -28,6 +28,11 @@
 \usepackage{longtable,booktabs}
 \usepackage{array}
 \usepackage{multirow}
+\usepackage{calc}
+
+% Provide default columnwidth for Pandoc table calculations
+% Pandoc sets this, but provide fallback for custom templates
+\providecommand{\columnwidth}{0.9\textwidth}
 
 % Links and References
 \usepackage{hyperref}
