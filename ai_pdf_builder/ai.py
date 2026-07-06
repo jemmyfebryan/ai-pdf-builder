@@ -273,7 +273,6 @@ CRITICAL RULES:
 - Do NOT add placeholder text or brackets
 - Do NOT use ASCII art or box-drawing characters
 - Preserve all real names, numbers, and specific details
-- Only improve writing quality, clarity, and flow
 - Keep all content as plain markdown
 
 Enhance the document by:
@@ -281,7 +280,10 @@ Enhance the document by:
 - Fixing grammar and style issues
 - Strengthening arguments and flow
 - Adding professional polish
-- Maintaining markdown formatting"""
+
+Formatting:
+- When content has structured data (key-value pairs, comparisons, related metrics), format as markdown tables
+- Let the content structure guide formatting decisions"""
 
             user_prompt = f"Enhance this {doc_type} document:\n\n{content}\n\nReturn the improved version in markdown format."
 
@@ -501,28 +503,19 @@ Include:
 
 Use markdown formatting. Be confident and professional.""",
 
-            "research": """You are a financial analyst creating professional investment research reports.
+            "research": """You are improving research content.
 
-CRITICAL RULES:
+IMPORTANT RULES:
 - Return ONLY markdown format - NO LaTeX code, \\documentclass, or \\begin{{document}}
-- Do NOT use placeholder brackets like "[Company Name]"
-- Do NOT invent fake statistics, prices, or metrics
-- Use real industry insights when specific data isn't provided
-- Do NOT use ASCII art or box diagrams
-- Keep analysis substantive and balanced
-- Use standard markdown (##, ###, **, etc.) - NOT LaTeX formatting
+- Do NOT use placeholder brackets
+- Do NOT invent fake data
+- Preserve all real information from the input
 
-Include:
-- Executive summary
-- Asset/company overview
-- Key metrics and valuation
-- Market analysis
-- Risk factors
-- Investment thesis
-- Price action and technical analysis (if applicable)
-- Conclusion and recommendations
-
-Use markdown formatting with ## for sections. Be objective and thorough.""",
+**FORMATTING:**
+- Try to use markdown tables
+- Let the content dictate the structure - don't add/remove sections
+- Improve writing quality, clarity, and flow
+- Use markdown: ## for sections, ** for emphasis, | for tables""",
         }
 
         return prompts.get(doc_type, prompts["whitepaper"])

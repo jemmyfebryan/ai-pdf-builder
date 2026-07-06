@@ -216,13 +216,16 @@ def enhance_command(
     document_type: str = typer.Argument(..., help="Document type"),
     input_file: str = typer.Argument(..., help="Input markdown file", exists=True),
     output: Optional[str] = typer.Option(None, "--output", "-o", help="Output file path"),
+    title: Optional[str] = typer.Option(None, "--title", "-t", help="Document title"),
+    author: Optional[str] = typer.Option(None, "--author", "-a", help="Author name"),
+    company: Optional[str] = typer.Option(None, "--company", "-c", help="Company name"),
     save_md: bool = typer.Option(False, "--save-md", help="Save enhanced markdown"),
 ):
     """
     🤖 Enhance content with AI then generate PDF.
 
     Example:
-        ai-pdf-builder enhance whitepaper ./rough-draft.md -o polished.pdf
+        ai-pdf-builder enhance whitepaper ./rough-draft.md -o polished.pdf --company "My Company"
     """
     try:
         # Read input file
@@ -244,7 +247,11 @@ def enhance_command(
 
         # Generate PDF
         with console.status("[bold cyan]Generating PDF...[/bold cyan]"):
-            metadata = DocumentMetadata(title=Path(input_file).stem)
+            metadata = DocumentMetadata(
+                title=title or Path(input_file).stem,
+                author=author,
+                company=company
+            )
             gen_options = GenerationOptions(
                 content=enhanced,
                 metadata=metadata,
