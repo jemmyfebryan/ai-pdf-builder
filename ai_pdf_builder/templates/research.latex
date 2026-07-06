@@ -105,10 +105,10 @@ $endif$
     \vspace{0.6cm}
     \begin{tcolorbox}[enhanced, colback=brandblue, colframe=brandblue, arc=1mm,
                       halign=center, valign=center, top=3mm, bottom=3mm]
-        \textcolor{white}{\Huge \textbf{$if(title)$$title$$endif$}} \\
+        \textcolor{white}{\Huge \textbf{\MakeUppercase{$if(title)$$title$$endif$}}} \\
         $if(subtitle)$
         \vspace{0.1cm}
-        \textcolor{brandaccent}{\large $subtitle$}
+        \textcolor{brandaccent}{\large \MakeUppercase{$subtitle$}}
         $endif$
     \end{tcolorbox}
 \end{center}
