@@ -83,3 +83,6 @@ temp/
 # Build artifacts
 *.pyc
 *.pyo
+
+# Test Environment
+test_environment/

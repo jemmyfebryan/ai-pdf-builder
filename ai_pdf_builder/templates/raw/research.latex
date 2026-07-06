@@ -1,0 +1,178 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[indonesian]{babel}
+\usepackage[left=1.5cm, right=1.5cm, top=2cm, bottom=2.5cm]{geometry}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault} % Modern Sans-Serif Font
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{tikz}
+
+% --- Custom Colors ---
+\definecolor{brandblue}{HTML}{0A192F} % Deep dark blue
+\definecolor{brandaccent}{HTML}{64FFDA} % Crypto teal/green accent
+\definecolor{bglight}{HTML}{F8F9FA} % Light gray for boxes
+\definecolor{textmain}{HTML}{2D3748}
+\definecolor{textlight}{HTML}{718096}
+
+% --- Page Style (Header/Footer) ---
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\lfoot{\small \textcolor{textlight}{\textbf{Akademi Crypto}}}
+\rfoot{\small \textcolor{textlight}{REFER TO IMPORTANT DISCLOSURE IN THE LAST PAGE OF THIS REPORT}}
+
+\begin{document}
+\color{textmain}
+\setstretch{1.15}
+
+% ================= PAGE 1 =================
+
+% --- Title Banner ---
+\begin{center}
+    \textcolor{textlight}{\small PHALA (\$PHA) | ALTCOINS OUTLOOK} \\
+    \vspace{0.3cm}
+    \textcolor{brandblue}{\huge \textbf{AKADEMI CRYPTO}} \\
+    \textcolor{brandblue}{\Large \textbf{RESEARCH}} \\
+    \vspace{0.6cm}
+    \begin{tcolorbox}[enhanced, colback=brandblue, colframe=brandblue, arc=1mm, 
+                      halign=center, valign=center, top=3mm, bottom=3mm]
+        \textcolor{white}{\Huge \textbf{PHALA (\$PHA)}} \\
+        \vspace{0.1cm}
+        \textcolor{brandaccent}{\large ALTCOINS OUTLOOK | ARTIFICIAL INTELLIGENCE}
+    \end{tcolorbox}
+\end{center}
+
+\vspace{0.4cm}
+
+% --- Table & Metadata ---
+\noindent
+\begin{minipage}[t]{0.35\textwidth}
+    \vspace{0pt}
+    \textbf{07 JANUARI 2025} \\
+    \textbf{RESULTS NOTE}
+\end{minipage}%
+\begin{minipage}[t]{0.65\textwidth}
+    \vspace{0pt}
+    \begin{tcolorbox}[enhanced, colback=white, colframe=textlight!30, arc=1mm, boxrule=0.5pt]
+        \renewcommand{\arraystretch}{1.2}
+        \begin{tabularx}{\textwidth}{X r}
+            \multicolumn{2}{l}{\textbf{Asset Details}} \\
+            \hline
+            \textbf{Name} & Phala \\
+            \textbf{Ticker} & \$PHA \\
+            \textbf{Current Valuation} & \$271M \\
+            \textbf{Circulating Supply} & 777M \\
+            \textbf{Total Supply} & 1B \\
+            \textbf{Max Supply} & 1B \\
+            \hline
+            \textcolor{textlight}{\small Data source:} & \textcolor{textlight}{\small CoinGecko}
+        \end{tabularx}
+    \end{tcolorbox}
+\end{minipage}
+
+\vspace{0.6cm}
+
+% --- Content ---
+\noindent \textcolor{brandblue}{\Large \textbf{APA ITU PHALA, PROJECT BERBASIS AI UNTUK AI AGENTS CONTRACT?}}
+\vspace{0.3cm}
+
+\noindent Phala adalah platform blockchain berbasis privasi yang dirancang untuk menyediakan solusi komputasi cloud terdesentralisasi dengan keamanan tingkat tinggi. Dibangun di atas Polkadot, Phala memanfaatkan teknologi Trusted Execution Environment (TEE) untuk memungkinkan eksekusi smart contract dengan privasi data yang terjamin. TEE adalah perangkat keras yang terisolasi sehingga memungkinkan data diproses secara aman tanpa bisa diakses oleh pihak ketiga termasuk node jaringan itu sendiri.
+
+Proses tersebut memungkinkan aplikasi yang dibangun di atas Phala untuk menjaga kerahasiaan data pengguna, sebuah fitur penting untuk aplikasi seperti manajemen data sensitif, keuangan, atau layanan kesehatan. Phala dirancang untuk menjawab tantangan privasi dalam ekosistem blockchain yang umumnya bersifat transparan di mana setiap data yang diproses dapat dilihat oleh publik. 
+
+Dengan pendekatan uniknya, Phala memungkinkan kombinasi transparansi blockchain dengan privasi data, menciptakan peluang besar untuk pengembangan aplikasi Web3. Selain itu, Phala juga menawarkan skalabilitas tinggi karena pemrosesan data dilakukan di luar chain menggunakan TEE, yang mengurangi beban pada blockchain utama.
+
+Token asli jaringan ini adalah \$PHA yang digunakan untuk membayar layanan, memberikan insentif kepada operator node, dan digunakan dalam mekanisme tata kelola jaringan. Phala juga memiliki desain dual-node di mana fungsi penyimpanan dan pemrosesan data dibagi untuk meningkatkan efisiensi dan keamanan. Dengan model inovatif ini, Phala menarik perhatian developer yang ingin membangun aplikasi yang mengutamakan privasi sekaligus memanfaatkan kekuatan interoperabilitas Polkadot.
+
+Dalam konteks adopsi, Phala memiliki potensi besar di era yang semakin sadar privasi, terutama dengan meningkatnya kekhawatiran tentang penggunaan data pribadi. Dengan solusi teknologi yang matang dan komunitas yang berkembang, Phala berambisi menjadi salah satu pemimpin dalam industri komputasi awan terdesentralisasi berbasis privasi.
+
+\vspace{0.6cm}
+
+% --- Image Placeholder 1 ---
+\begin{tcolorbox}[enhanced, colback=bglight, colframe=textlight!20, arc=2mm, boxrule=1pt, height=6.5cm, halign=center, valign=center]
+    \textcolor{textlight}{\LARGE \textbf{[Diagram: Chain of Trust Phala]}} \\
+    \vspace{0.2cm}
+    \textcolor{textlight}{\small \textit{(Contains: Pytorch, Llama3, Image Hash, Onchain Reg, CPU TEE (Intel TDX/AMD SEV), GPU Attestation)}}
+\end{tcolorbox}
+\noindent \textbf{Gambar 1.1 Mekanisme Chain of Trust Phala} \\
+\textcolor{textlight}{\small Source: Phala. \hfill Data taken as 07-January-2025}
+
+\newpage
+% ================= PAGE 2 =================
+\fancyhead[L]{\small \textcolor{textlight}{\textbf{AKADEMI CRYPTO RESEARCH}}}
+\fancyhead[R]{\small \textcolor{textlight}{\textbf{PHALA (\$PHA)}}}
+\renewcommand{\headrulewidth}{0.5pt}
+
+% --- Image Placeholder 2 ---
+\begin{tcolorbox}[enhanced, colback=bglight, colframe=textlight!20, arc=2mm, boxrule=1pt, height=6.5cm, halign=center, valign=center]
+    \textcolor{textlight}{\LARGE \textbf{[Grafik: Chart \$PHA Yearly]}} \\
+    \vspace{0.2cm}
+    \textcolor{textlight}{\small \textit{(Price chart trending from Feb to Dec, current price zone \$0.1 - \$0.5)}}
+\end{tcolorbox}
+\noindent \textbf{Gambar 1.2 Chart \$PHA Yearly} \\
+\textcolor{textlight}{\small Source: CoinGecko. \hfill Data taken as 07-January-2025}
+
+\vspace{0.5cm}
+\noindent Phala menunjukkan potensi pertumbuhan yang menarik, baik dari sisi eksekusi kontrak maupun adopsi teknologi AI Agents. Pada Gambar 1.3, terlihat bahwa eksekusi kontrak pada platform ini mengalami peningkatan signifikan sebesar 107\% secara tahunan (YoY), meskipun terdapat sedikit penurunan sebesar 3\% secara kuartalan (QoQ). Lonjakan tahunan ini mencerminkan adanya peningkatan permintaan yang konsisten terhadap layanan Phala, menunjukkan bahwa platform ini semakin mendapatkan kepercayaan dalam ekosistem blockchain. Lonjakan YoY yang besar ini menjadi indikator bahwa Phala terus menarik perhatian pengguna baru dan developer untuk memanfaatkan teknologi komputasi berbasis privasinya.
+
+Sementara itu, pada Gambar 1.4. adopsi AI Agents Contract di Phala menunjukkan tren eksponensial, dengan total kontrak mencapai 4.9K hingga akhir kuartal ketiga tahun 2025, termasuk 44 kontrak baru yang diamankan hanya dalam Q3. Tren ini menandakan bahwa Phala sedang menjadi platform pilihan untuk aplikasi berbasis AI yang memerlukan privasi data dan eksekusi aman. Pertumbuhan eksponensial ini menjadi bukti kemampuan Phala untuk memanfaatkan integrasi teknologi AI dengan infrastrukturnya, yang menjadi nilai tambah dalam era adopsi AI yang terus meningkat. 
+
+Saat ini di weekly chart kita melihat bahwa Phala terlihat melakukan koreksi yang mana cukup menarik untuk diperhatikan di range harga \$0,035 sampai dengan \$0.02. Apabila trend AI terus berlanjut maka Phala cukup menarik untuk dijadikan opsi.
+
+\vspace{0.6cm}
+
+% --- Side by Side Image Placeholders ---
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+    \begin{tcolorbox}[enhanced, colback=brandblue!5, colframe=textlight!20, arc=2mm, boxrule=1pt, height=5cm, halign=center, valign=center]
+        \textcolor{textmain}{\large \textbf{[Bar Chart: Contract Execution]}} \\
+        \textcolor{textlight}{\footnotesize Phala contract executions fell 3\% QoQ, but were up 107\% YoY}
+    \end{tcolorbox}
+    \textbf{Gambar 1.3 Phala Contract Execution} \\
+    \textcolor{textlight}{\small Source: Messari. \\ Data taken as 07-January-2025}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+    \begin{tcolorbox}[enhanced, colback=brandblue!5, colframe=textlight!20, arc=2mm, boxrule=1pt, height=5cm, halign=center, valign=center]
+        \textcolor{textmain}{\large \textbf{[Line Chart: AI Agents]}} \\
+        \textcolor{textlight}{\footnotesize Phala secured 44 contracts in Q3, reaching a YTD total of 4.9K contracts}
+    \end{tcolorbox}
+    \textbf{Gambar 1.4 Peningkatan AI Agents Contract Pada Phala} \\
+    \textcolor{textlight}{\small Source: Messari. \\ Data taken as 07-January-2025}
+\end{minipage}
+
+\newpage
+% ================= PAGE 3 =================
+\fancyhead[R]{} % Clear right header for disclaimer page
+
+\vspace*{3cm}
+
+\begin{center}
+    \textcolor{brandblue}{\Huge \textbf{AKADEMI CRYPTO RESEARCH}} \\
+    \vspace{0.8cm}
+    \textbf{COPYRIGHT © 2024 BY AKADEMI CRYPTO ALL RIGHTS RESERVED.} \\
+    \vspace{0.3cm}
+    \textcolor{textmain}{\small No Portion of This Content May be Reproduced in Any Form Without the Prior Written Permission from Akademi Crypto.}
+\end{center}
+
+\vspace{2cm}
+
+\noindent \textcolor{brandblue}{\Large \textbf{DISCLAIMERS}}
+\vspace{0.3cm}
+
+\noindent \textcolor{textmain}{\small
+This research is based on information obtained from sources believed to be reliable, but we do not make any representation or warranty nor accept any responsibility or liability as to its accuracy, completeness or correctness. Opinions expressed are subject to change without notice. This document is prepared for general circulation. Any recommendations contained in this document does not have regard to the specific investment objectives, financial situation and the particular needs of any specific addressee. 
+
+This document is not and should not be construed as an offer or a solicitation of an offer to purchase or subscribe or sell any securities. This research and its content are for internal research and should not be construed as investment reference. The recommendations provided, including maintaining a portfolio allocation of 70\% in Bitcoin, 20\% in stablecoins, and limiting altcoin exposure to no more than 2\% of the total portfolio, are general guidelines based on market trends and risk management principles.
+}
+
+\end{document}

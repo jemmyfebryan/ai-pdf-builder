@@ -58,6 +58,7 @@ DOCUMENT_TYPES = [
     "nda",
     "report",
     "proposal",
+    "research",
 ]
 
 

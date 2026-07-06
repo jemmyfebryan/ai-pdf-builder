@@ -149,6 +149,56 @@ class GeminiAI:
 
         return text
 
+    def _remove_latex_code(self, content: str) -> str:
+        """
+        Remove any LaTeX code from content, keeping only markdown.
+        This is used to clean up AI-generated content that incorrectly includes LaTeX.
+
+        Strategy: Find where actual markdown content starts (first # heading) and ends,
+        and extract only that section.
+        """
+        lines = content.split('\n')
+
+        # Find the first line that looks like markdown content (heading)
+        first_markdown_line = 0
+        for i, line in enumerate(lines):
+            stripped = line.strip()
+            if stripped.startswith('##') or stripped.startswith('# '):
+                first_markdown_line = i
+                break
+
+        # Find the last line before end document
+        last_markdown_line = len(lines)
+        for i in range(len(lines) - 1, -1, -1):
+            if '\\end{document}' in lines[i]:
+                last_markdown_line = i
+                break
+
+        # Extract markdown content between these boundaries
+        if first_markdown_line > 0:
+            markdown_lines = lines[first_markdown_line:last_markdown_line]
+
+            # Filter out any remaining LaTeX commands from the markdown
+            filtered = []
+            for line in markdown_lines:
+                # Skip lines that are purely LaTeX commands
+                stripped = line.strip()
+                if stripped.startswith('\\usepackage') or \
+                   stripped.startswith('\\documentclass') or \
+                   stripped.startswith('\\begin{') and not stripped.startswith('\\begin{document}') or \
+                   stripped.startswith('\\end{') and not stripped.startswith('\\end{document}') or \
+                   stripped.startswith('\\definecolor') or \
+                   stripped.startswith('\\renewcommand') or \
+                   stripped.startswith('\\usetikzlibrary') or \
+                   (stripped.startswith('%') and 'ai-pdf-builder' in stripped):
+                    continue
+                filtered.append(line)
+
+            return '\n'.join(filtered).strip()
+
+        # If no markdown found, return as is
+        return content
+
     def generate(self, options: AIOptions) -> AIContentResult:
         """
         Generate document content using AI.
@@ -218,11 +268,13 @@ class GeminiAI:
         try:
             system_prompt = f"""You are a professional editor improving {doc_type} documents.
 
-IMPORTANT:
+CRITICAL RULES:
+- Return ONLY markdown format - NO LaTeX code, \\documentclass, or \\begin{{document}}
 - Do NOT add placeholder text or brackets
 - Do NOT use ASCII art or box-drawing characters
 - Preserve all real names, numbers, and specific details
 - Only improve writing quality, clarity, and flow
+- Keep all content as plain markdown
 
 Enhance the document by:
 - Improving clarity and readability
@@ -239,7 +291,10 @@ Enhance the document by:
             )
 
             generation_time = time.time() - start_time
-            enhanced_content = self._sanitize_for_latex(response.text)
+            # First strip any LaTeX code the AI incorrectly generated
+            cleaned_content = self._remove_latex_code(response.text)
+            # Then sanitize for LaTeX compatibility
+            enhanced_content = self._sanitize_for_latex(cleaned_content)
 
             return AIContentResult(
                 success=True,
@@ -445,6 +500,29 @@ Include:
 - Investment/next steps
 
 Use markdown formatting. Be confident and professional.""",
+
+            "research": """You are a financial analyst creating professional investment research reports.
+
+CRITICAL RULES:
+- Return ONLY markdown format - NO LaTeX code, \\documentclass, or \\begin{{document}}
+- Do NOT use placeholder brackets like "[Company Name]"
+- Do NOT invent fake statistics, prices, or metrics
+- Use real industry insights when specific data isn't provided
+- Do NOT use ASCII art or box diagrams
+- Keep analysis substantive and balanced
+- Use standard markdown (##, ###, **, etc.) - NOT LaTeX formatting
+
+Include:
+- Executive summary
+- Asset/company overview
+- Key metrics and valuation
+- Market analysis
+- Risk factors
+- Investment thesis
+- Price action and technical analysis (if applicable)
+- Conclusion and recommendations
+
+Use markdown formatting with ## for sections. Be objective and thorough.""",
         }
 
         return prompts.get(doc_type, prompts["whitepaper"])
