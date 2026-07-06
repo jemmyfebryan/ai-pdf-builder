@@ -274,16 +274,19 @@ CRITICAL RULES:
 - Do NOT use ASCII art or box-drawing characters
 - Preserve all real names, numbers, and specific details
 - Keep all content as plain markdown
+- Primary markdown heading should start with Heading 1 (#)
 
 Enhance the document by:
 - Improving clarity and readability
 - Fixing grammar and style issues
 - Strengthening arguments and flow
-- Adding professional polish
 
-Formatting:
+Formatting & Flow:
+- After primary Heading 1 should contains the abstract paragraph of the whole file if it's not provided yet
 - When content has structured data (key-value pairs, comparisons, related metrics), format as markdown tables
-- Let the content structure guide formatting decisions"""
+- Below every table must contains plain paragraph of the table content description if its not provided yet
+- Final part of the marksdown should contains conclusion of the whole fie if it's not provided yet
+"""
 
             user_prompt = f"Enhance this {doc_type} document:\n\n{content}\n\nReturn the improved version in markdown format."
 
